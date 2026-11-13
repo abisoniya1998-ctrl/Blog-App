@@ -33,7 +33,7 @@ function Blogs() {
 
         });
 
-        axios.get("http://localhost:5000/api/blogs").then((res) => {
+         axios.get(`${process.env.REACT_APP_API_URL}/api/blogs`).then((res) => {
             console.log(res.data)
             setBlogs(res.data)
         }).catch(() => {
@@ -52,10 +52,9 @@ function Blogs() {
 
     const handleLike = async (blog_id) => {
         try {
-            const response = await axios.patch(`http://localhost:5000/api/blogs/like/${blog_id}`);
-
+          const response = await axios.patch(`${process.env.REACT_APP_API_URL}/api/blogs/like/${blog_id}`);
             if (response.status === 200) {
-                axios.get("http://localhost:5000/api/blogs").then((res) => {
+              axios.get(`${process.env.REACT_APP_API_URL}/api/blogs`).then((res) => {
                     console.log(res.data)
                     setBlogs(res.data)
                 }).catch(() => {
@@ -87,7 +86,7 @@ function Blogs() {
 
         const likes = 0
 
-        axios.post("http://localhost:5000/api/blogs", {
+       axios.post(`${process.env.REACT_APP_API_URL}/api/blogs`, {
             newTitle,
             date,
             newContent,
@@ -95,7 +94,7 @@ function Blogs() {
         }).then((res) => {
             console.log(res.data)
 
-            axios.get("http://localhost:5000/api/blogs").then((res) => {
+            axios.get(`${process.env.REACT_APP_API_URL}/api/blogs`).then((res) => {
                 console.log(res.data)
                 setBlogs(res.data)
             }).catch(() => {
